@@ -2,8 +2,8 @@ POST  http://localhost:5000/api/auth/register
 Content-Type: application/json
 
 {
-    "userName" : "letuanbao",
-    "password" : "123456"
+    "userName" : "levanha",
+    "password" : "789"
 }
 
 ###
@@ -11,7 +11,7 @@ Content-Type: application/json
 POST http://localhost:5000/api/auth/login
 Content-Type: application/json
 
-{
+{   
     "userName" : "letuanbao",
     "password" : "123456"
 }
@@ -20,11 +20,12 @@ Content-Type: application/json
 
 POST  http://localhost:5000/api/posts
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzIzYmI5MDIyNTBmMDRiYjg3N2JjN2QiLCJpYXQiOjE2NjMzNDMyMTB9.QSYLnbUbEAJe91eWYv8chmPd4b7Zjl0yk_HSmtE_LUs
 
 {
-    "title" : "first post",
-    "description" : "reactjs",
-    "url" : "google.com",
+    "title" : "HTML",
+    "description" : "HTML 101",
+    "url" : "youtube.com",
     "status" : "LEARNING"
 }
 

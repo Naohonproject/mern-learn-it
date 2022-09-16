@@ -2,11 +2,25 @@ const express = require("express");
 const router = express.Router();
 
 const Post = require("../models/Post");
+const verifyToken = require("../middleware/auth");
+
+// @routes GET api/posts
+// @desc Get posts
+// @access Private
+router.get("/", verifyToken, async (req, res) => {
+  try {
+    const posts = await Post.find({ user: req.userId });
+    res.json({ success: true, posts });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+});
 
 // @routes POST api/posts
 // @desc Create post
 // @access Private
-router.post("/", async (req, res) => {
+router.post("/", verifyToken, async (req, res) => {
   const { title, description, url, status } = req.body;
 
   console.log(req.body);
@@ -25,7 +39,7 @@ router.post("/", async (req, res) => {
       description,
       url: url.startsWith("https://") ? url : `https://${url}`,
       status: status || "TO LEARN",
-      user: "6323bb902250f04bb877bc7d",
+      user: req.userId,
     });
     // save new post to database
     await newPost.save();
