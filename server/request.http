@@ -43,6 +43,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzIzY
 ###
 
 GET http://localhost:5000/api/posts HTTP/1.1
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzI0OWRlZDI1ZmY1YWIyNjAwODJiYWEiLCJpYXQiOjE2NjMzNDQxMDl9.0pTBJAt7ChVPW2njHI8dXp4Nq2nhsv63ltrW8IYyC4k
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzI0OTViYTk4Nzk3MWZiNjljNGMyNzciLCJpYXQiOjE2NjMzNDQ0NzZ9.yh43b_1McORueC2UfrDffadY8s-hT2lmJo28IE6Z8zQ
 
+###
+
+PUT  http://localhost:5000/api/posts/632499cf3745ac1fe19b0f80 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzI0OTViYTk4Nzk3MWZiNjljNGMyNzciLCJpYXQiOjE2NjMzNDYzNDR9.2U1HEmE9unHsOFHxc2ods2UDuLWEOzf7xoxe1cJ0bmI
+
+{
+    "title" : "VueJs",
+    "description" : "vue",
+    "url" : "https://vue.org",
+    "status" : "LEARNING"
+}   
