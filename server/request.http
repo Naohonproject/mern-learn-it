@@ -15,3 +15,16 @@ Content-Type: application/json
     "userName" : "letuanbao",
     "password" : "123456"
 }
+
+### 
+
+POST  http://localhost:5000/api/posts
+Content-Type: application/json
+
+{
+    "title" : "first post",
+    "description" : "reactjs",
+    "url" : "google.com",
+    "status" : "LEARNING"
+}
+

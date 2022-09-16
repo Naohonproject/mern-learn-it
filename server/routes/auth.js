@@ -77,7 +77,7 @@ router.post("/login", async (req, res) => {
     if (!user) {
       return res.status(400).json({
         success: false,
-        message: "user name is invalid",
+        message: "user name or password is invalid",
       });
     }
     // user name found,verify password
@@ -86,7 +86,7 @@ router.post("/login", async (req, res) => {
     if (!isValidPassword) {
       return res.status(400).json({
         success: false,
-        message: "password is invalid",
+        message: "user name or password is invalid",
       });
     }
     // all checking case passed , all good, return access token to client
