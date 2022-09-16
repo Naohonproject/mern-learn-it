@@ -6,7 +6,7 @@ const authRouter = require("./routes/auth");
 const postRouter = require("./routes/post");
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 const URI = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@learning.ziel6un.mongodb.net/learnit?retryWrites=true&w=majority`;
 
 const connectDatabase = async () => {
