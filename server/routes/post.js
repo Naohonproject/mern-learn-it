@@ -61,10 +61,9 @@ router.post("/", verifyToken, async (req, res) => {
   }
 });
 
-// @routes PUT api/posts
-// @desc Update posts
+// @routes PUT api/posts/:id
+// @desc Update post
 // @access Private
-
 router.put("/:id", verifyToken, async (req, res) => {
   const { title, description, url, status } = req.body;
 
@@ -109,6 +108,27 @@ router.put("/:id", verifyToken, async (req, res) => {
       post: updatedPost,
       message: "Excellent Progress!",
     });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+});
+
+// @routes DELETE api/posts/:id
+// @desc De;ete post
+// @access Private
+router.delete("/:id", verifyToken, async (req, res) => {
+  try {
+    const postDeleteCondition = { _id: req.params.id, user: req.userId };
+    const deletedPost = await Post.findByIdAndDelete(postDeleteCondition);
+    //   check user not authorized or post not found
+    if (!deletedPost) {
+      return res.status(401).json({
+        success: false,
+        message: "Post not found or user not unauthorized",
+      });
+    }
+    res.json({ success: true, post: deletedPost });
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: "Internal Server Error" });
