@@ -8,7 +8,6 @@ const User = require("../models/User");
 // @routes POST api/auth/register
 // @desc Register user
 // @access Public
-
 router.post("/register", async (req, res) => {
   const { userName, password } = req.body;
 
@@ -35,6 +34,7 @@ router.post("/register", async (req, res) => {
     // create new User instance ,this will be document in mongdb
     const newUser = new User({ userName: userName, password: hashedPassword });
 
+    // save user recently created to mongDb cloud, this async function
     await newUser.save();
 
     // return token after register successfully if create new user successfully
@@ -49,7 +49,64 @@ router.post("/register", async (req, res) => {
       message: "create account successfully",
       accessToken,
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+});
+
+// @routes POST api/auth/login
+// @desc login user
+// @access Public
+router.post("/login", async (req, res) => {
+  const { userName, password } = req.body;
+
+  // simplest validation
+  if (!userName || !password) {
+    return res.status(400).json({
+      success: false,
+      message: " user name and/or password are missing",
+    });
+  }
+
+  try {
+    // check for existing user
+    const user = await User.findOne({ userName: userName });
+
+    // user name not found in db , response with error message
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "user name is invalid",
+      });
+    }
+    // user name found,verify password
+    const isValidPassword = await argon2.verify(user.password, password);
+    // if password user input not match password was stored in db, response with error message
+    if (!isValidPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "password is invalid",
+      });
+    }
+    // all checking case passed , all good, return access token to client
+
+    // return token after register successfully if create new user successfully
+    // create jwt to return to client to validate user
+    const accessToken = jwt.sign(
+      { userId: user._id },
+      process.env.ACCESS_TOKEN_SECRET
+    );
+    // response a json
+    res.json({
+      success: true,
+      message: "Logged in Successfully",
+      accessToken,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
 });
 
 module.exports = router;
