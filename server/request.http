@@ -2,8 +2,8 @@ POST  http://localhost:5000/api/auth/register
 Content-Type: application/json
 
 {
-    "userName" : "levanha",
-    "password" : "789"
+    "userName" : "lequocdat",
+    "password" : "456"
 }
 
 ###
@@ -14,6 +14,17 @@ Content-Type: application/json
 {   
     "userName" : "letuanbao",
     "password" : "123456"
+}
+
+###
+
+
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{   
+    "userName" : "levanha",
+    "password" : "789"
 }
 
 ### 
@@ -28,4 +39,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzIzY
     "url" : "youtube.com",
     "status" : "LEARNING"
 }
+
+###
+
+GET http://localhost:5000/api/posts HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzI0OWRlZDI1ZmY1YWIyNjAwODJiYWEiLCJpYXQiOjE2NjMzNDQxMDl9.0pTBJAt7ChVPW2njHI8dXp4Nq2nhsv63ltrW8IYyC4k
 

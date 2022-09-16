@@ -9,9 +9,13 @@ const verifyToken = require("../middleware/auth");
 // @access Private
 router.get("/", verifyToken, async (req, res) => {
   try {
+    //   try to take all post of current user in database
     const posts = await Post.find({ user: req.userId });
+    //   if posts exist, Post.find() eventually fullfil, res
     res.json({ success: true, posts });
   } catch (error) {
+    //   if there is error in Post.find() the error will be catch here then response error
+    //   error status and error message to client
     console.log(error);
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
