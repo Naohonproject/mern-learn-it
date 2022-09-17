@@ -1,10 +1,18 @@
 import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+import Landing from "./components/layout/Landing";
+import Auth from "./components/views/Auth";
 
 function App() {
   return (
-    <div className="App">
-      <h1>hello world</h1>
-    </div>
+    <Router>
+      <Routes>
+        <Route index path="/" element={<Landing />} />
+        <Route path="/login" element={<Auth authRoute="login" />} />
+        <Route path="/register" element={<Auth authRoute="register" />} />
+      </Routes>
+    </Router>
   );
 }
 
