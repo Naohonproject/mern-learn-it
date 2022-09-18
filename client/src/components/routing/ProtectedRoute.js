@@ -3,9 +3,10 @@ import { useContext } from "react";
 
 import { AuthContext } from "../../context/authContext";
 import Spinner from "react-bootstrap/esm/Spinner";
-import DashBoard from "../views/DashBoard";
+import NavbarMenu from "../auth/NavbarMenu";
 
-const ProtectedRoute = () => {
+// HOC
+const ProtectedRoute = ({ component: Component, ...rest }) => {
   // use context to recognize that user logged in or not,this will dedicate how dashboard
   // is render base on the context
 
@@ -24,7 +25,14 @@ const ProtectedRoute = () => {
   //  because this bases on isAuthenticated, so that, right after login successfully, if we not call  loadUser();
   // isAuthenticated still false , so that we need to call loadUser() right after log in , before navigate("/dashboard")
   // or we call await loadUser right inside loginUser() after setItem to local storage
-  return isAuthenticated ? <DashBoard /> : <Navigate to="/login" />;
+  return isAuthenticated ? (
+    <>
+      <NavbarMenu />
+      <Component {...rest} />
+    </>
+  ) : (
+    <Navigate to="/login" />
+  );
 };
 
 export default ProtectedRoute;

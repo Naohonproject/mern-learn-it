@@ -93,8 +93,22 @@ const AuthContextProvider = ({ children }) => {
     }
   };
 
+  const logOutUser = () => {
+    // logic is same with the codes inside catch function when loadUser() but the token is wrong or out of date
+    // remove that token from local storage and set the header key Authorization to null
+    localStorage.removeItem(LOCAL_STORAGE_TOKEN);
+    //  dispatch to change context
+    dispatch({
+      type: "SET_AUTH",
+      payload: {
+        isAuthenticated: false,
+        user: null,
+      },
+    });
+  };
+
   // context data, pass this function as global value, that all route can reach
-  const authContextData = { logInUser, authState, registerUser };
+  const authContextData = { logInUser, authState, registerUser, logOutUser };
 
   // return , pass dataContext to let all children can access if the children useContext(AuthContext)
   return (
