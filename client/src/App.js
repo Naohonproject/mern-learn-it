@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Landing from "./components/layout/Landing";
 import Auth from "./components/views/Auth";
-import DashBoard from "./components/views/DashBoard";
 import AuthContextProvider from "./context/authContext";
+import ProtectedRoute from "./components/routing/ProtectedRoute";
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
           <Route index path="/" element={<Landing />} />
           <Route path="/login" element={<Auth authRoute="login" />} />
           <Route path="/register" element={<Auth authRoute="register" />} />
-          <Route path="/dashboard" element={<DashBoard />} />
+          <Route path="/dashboard" element={<ProtectedRoute />} />
         </Routes>
       </Router>
     </AuthContextProvider>

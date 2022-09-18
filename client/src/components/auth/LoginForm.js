@@ -1,22 +1,21 @@
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
 
 // import AuthContext to use the dataContext
 import { AuthContext } from "../../context/authContext";
+import AlertMessage from "../layout/AlertMessage";
 
 const LoginForm = () => {
   // context
   const { logInUser } = useContext(AuthContext);
 
-  // local state, login form data
+  // local state, login form data,alert
   const [loginForm, setLoginForm] = useState({ userName: "", password: "" });
-  const { userName, password } = loginForm;
+  const [alert, setAlert] = useState(null);
 
-  // navigate
-  const navigate = useNavigate();
+  const { userName, password } = loginForm;
 
   // function to handle on change event on input from , change the value of state
   const onChangeLoginForm = (event) => {
@@ -26,13 +25,14 @@ const LoginForm = () => {
     });
   };
 
+  // send request to server to login
   const login = async (event) => {
     event.preventDefault();
     try {
       const logInData = await logInUser(loginForm);
-      if (logInData.success) {
-        navigate("/dashboard");
-      } else {
+      if (!logInData.success) {
+        setAlert({ type: "danger", message: logInData.message });
+        setTimeout(() => setAlert(null), 5000);
       }
     } catch (error) {
       console.log(error);
@@ -41,6 +41,7 @@ const LoginForm = () => {
   return (
     <>
       <Form className="my-4" onSubmit={login}>
+        <AlertMessage info={alert} />
         <Form.Group className="mb-3">
           <Form.Control
             type="text"

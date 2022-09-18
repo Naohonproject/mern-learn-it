@@ -62,3 +62,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzI0O
 
 DELETE http://localhost:5000/api/posts/632499cf3745ac1fe19b0f80 HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzI0OTViYTk4Nzk3MWZiNjljNGMyNzciLCJpYXQiOjE2NjMzNDYzNDR9.2U1HEmE9unHsOFHxc2ods2UDuLWEOzf7xoxe1cJ0bmI
+
+
+###
+
+GET http://localhost:5000/api/auth
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzIzYmI5MDIyNTBmMDRiYjg3N2JjN2QiLCJpYXQiOjE2NjM0Mjc4MjJ9.pPdGssZB-5QM2TH84WljhSFYRtRbujZZFl2oaGGUm_4

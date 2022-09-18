@@ -26,14 +26,21 @@ const AuthContextProvider = ({ children }) => {
       setAuthToken(localStorage[LOCAL_STORAGE_TOKEN]);
     }
     try {
-      const response = axios.get(`${apiUrl}/auth`);
+      // send the get request to server to authenticate
+      // the access token in the local storage is valid or not
+      const response = await axios.get(`${apiUrl}/auth`);
       if (response.data.success) {
+        // if the token valid, dispatch action to change
+        // the global state(auth context)
         dispatch({
           type: "SET_AUTH",
           payload: { isAuthenticated: true, user: response.data.user },
         });
       }
     } catch (error) {
+      // if the token not valid from server
+      // remove that token from local storage
+      // and set the authContext to the init state
       localStorage.removeItem(LOCAL_STORAGE_TOKEN);
       setAuthToken(null);
       dispatch({
@@ -46,6 +53,8 @@ const AuthContextProvider = ({ children }) => {
     }
   };
 
+  // useEffect to call loadUser function every time the AuthContextProvider
+  // is mounted to DOM
   useEffect(() => {
     loadUser();
   }, []);
@@ -57,6 +66,25 @@ const AuthContextProvider = ({ children }) => {
       // server response a json, if success is true, store the access token in local_storage
       if (response.data.success) {
         localStorage.setItem(LOCAL_STORAGE_TOKEN, response.data.accessToken);
+        // when login successfully, we authenticate the token with server , then dispatch to change the context
+        await loadUser();
+        return response.data;
+      }
+    } catch (error) {
+      if (error.response.data) return error.response.data;
+      else return { success: false, message: error.message };
+    }
+  };
+
+  // register
+  const registerUser = async (userForm) => {
+    try {
+      const response = await axios.post(`${apiUrl}/auth/register`, userForm);
+      // server response a json, if success is true, store the access token in local_storage
+      if (response.data.success) {
+        localStorage.setItem(LOCAL_STORAGE_TOKEN, response.data.accessToken);
+        // when login successfully, we authenticate the token with server , then dispatch to change the context
+        await loadUser();
         return response.data;
       }
     } catch (error) {
@@ -66,7 +94,7 @@ const AuthContextProvider = ({ children }) => {
   };
 
   // context data, pass this function as global value, that all route can reach
-  const authContextData = { logInUser, authState };
+  const authContextData = { logInUser, authState, registerUser };
 
   // return , pass dataContext to let all children can access if the children useContext(AuthContext)
   return (
