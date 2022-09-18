@@ -14,12 +14,13 @@ import { PostContext } from "../../context/postContext";
 import { AuthContext } from "../../context/authContext";
 import SinglePost from "../posts/SinglePost";
 import AddPostModal from "../posts/AddPostModal";
+import UpdatePostModal from "../posts/UpdatePostModal";
 import addIcon from "../../assets/plus-circle-fill.svg";
 
 const DashBoard = () => {
   // context
   const {
-    postState: { posts, postLoading },
+    postState: { posts, post, postLoading },
     getPosts,
     setShowAddPostModal,
     showToast: { show, message, type },
@@ -93,6 +94,7 @@ const DashBoard = () => {
   return (
     <>
       {body}
+      {post !== null && <UpdatePostModal />}
       <AddPostModal />
       {/* show Toast after post created */}
       <Toast
