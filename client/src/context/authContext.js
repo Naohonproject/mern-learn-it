@@ -4,6 +4,7 @@ import axios from "axios";
 import { authReducer } from "../reducers/authReducer";
 import { apiUrl, LOCAL_STORAGE_TOKEN } from "./constant";
 import setAuthToken from "../utils/setAuthToken";
+import { SET_AUTH } from "../context/constant";
 
 // create context to server global state,export to let the children use useContext(authContext) to
 // be able to see value  that is passed to the authContext
@@ -33,7 +34,7 @@ const AuthContextProvider = ({ children }) => {
         // if the token valid, dispatch action to change
         // the global state(auth context)
         dispatch({
-          type: "SET_AUTH",
+          type: SET_AUTH,
           payload: { isAuthenticated: true, user: response.data.user },
         });
       }
@@ -44,7 +45,7 @@ const AuthContextProvider = ({ children }) => {
       localStorage.removeItem(LOCAL_STORAGE_TOKEN);
       setAuthToken(null);
       dispatch({
-        type: "SET_AUTH",
+        type: SET_AUTH,
         payload: {
           isAuthenticated: false,
           user: null,
@@ -99,7 +100,7 @@ const AuthContextProvider = ({ children }) => {
     localStorage.removeItem(LOCAL_STORAGE_TOKEN);
     //  dispatch to change context
     dispatch({
-      type: "SET_AUTH",
+      type: SET_AUTH,
       payload: {
         isAuthenticated: false,
         user: null,

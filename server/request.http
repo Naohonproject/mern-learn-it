@@ -31,13 +31,13 @@ Content-Type: application/json
 
 POST  http://localhost:5000/api/posts
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzIzYmI5MDIyNTBmMDRiYjg3N2JjN2QiLCJpYXQiOjE2NjMzNDMyMTB9.QSYLnbUbEAJe91eWYv8chmPd4b7Zjl0yk_HSmtE_LUs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzIzYmI5MDIyNTBmMDRiYjg3N2JjN2QiLCJpYXQiOjE2NjM1MDYxNDN9.v7XuSJ0EtJUk26usToLjHQSV47FiUxZ41rfqCS8y4r8
 
 {
-    "title" : "HTML",
-    "description" : "HTML 101",
+    "title" : "CSS",
+    "description" : "CSS 101",
     "url" : "youtube.com",
-    "status" : "LEARNING"
+    "status" : "TO LEARN"
 }
 
 ###
@@ -49,13 +49,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzI0O
 
 PUT  http://localhost:5000/api/posts/632499cf3745ac1fe19b0f80 HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzI0OTViYTk4Nzk3MWZiNjljNGMyNzciLCJpYXQiOjE2NjMzNDYzNDR9.2U1HEmE9unHsOFHxc2ods2UDuLWEOzf7xoxe1cJ0bmI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzIzYmI5MDIyNTBmMDRiYjg3N2JjN2QiLCJpYXQiOjE2NjM1MDYwNTR9.RaagxjulTZYnez6f6EVy8-fU3D-zqAw1RZltbSqBbGA
 
 {
     "title" : "VueJs",
     "description" : "vue",
     "url" : "https://vue.org",
-    "status" : "LEARNING"
+    "status" : "TO LEARN"
 }
 
 ###
