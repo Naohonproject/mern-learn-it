@@ -7,6 +7,7 @@ import {
   POST_LOADED_SUCCESS,
   POST_LOADED_FAIL,
   ADD_POST,
+  DELETE_POST,
 } from "./constant";
 
 export const PostContext = createContext();
@@ -53,6 +54,25 @@ const PostContextProvider = ({ children }) => {
         : { success: false, message: "server error" };
     }
   };
+  // delete post
+
+  const deletePost = async (postId) => {
+    try {
+      const response = await axios.delete(`${apiUrl}/posts/${postId}`);
+      if (response.data.success) {
+        dispatch({ type: DELETE_POST, payload: postId });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // update Post
+  const updatePost = async (updatedPost) => {
+    try {
+      const reponse = await axios.put(`${apiUrl}`);
+    } catch (error) {}
+  };
 
   const postContextData = {
     getPosts,
@@ -62,6 +82,7 @@ const PostContextProvider = ({ children }) => {
     addPost,
     showToast,
     setShowToast,
+    deletePost,
   };
   return (
     <PostContext.Provider value={postContextData}>

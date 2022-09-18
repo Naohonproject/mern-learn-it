@@ -55,7 +55,9 @@ const DashBoard = () => {
             <Card.Text>
               Click button to make your first track of leaning
             </Card.Text>
-            <Button variant="primary">Track</Button>
+            <Button onClick={() => setShowAddPostModal(true)} variant="primary">
+              Track
+            </Button>
           </Card.Body>
         </Card>
       </>
@@ -111,7 +113,6 @@ const DashBoard = () => {
           <strong>{message}</strong>
         </Toast.Body>
       </Toast>
-      <Toast />
     </>
   );
 };

@@ -2,6 +2,7 @@ import {
   POST_LOADED_FAIL,
   POST_LOADED_SUCCESS,
   ADD_POST,
+  DELETE_POST,
 } from "../context/constant";
 
 export const postReducer = (state, action) => {
@@ -15,6 +16,12 @@ export const postReducer = (state, action) => {
     }
     case ADD_POST: {
       return { ...state, posts: [...state.posts, payload] };
+    }
+    case DELETE_POST: {
+      return {
+        ...state,
+        posts: state.posts.filter((post) => post._id !== payload),
+      };
     }
     default:
       return state;

@@ -7,3 +7,4 @@ export const SET_AUTH = "SET_AUTH";
 export const POST_LOADED_SUCCESS = "POSTS_LOADED_SUCCESS";
 export const POST_LOADED_FAIL = "POSTS_LOADED_FAIL";
 export const ADD_POST = "ADD_POST";
+export const DELETE_POST = "DELETE_POST";
