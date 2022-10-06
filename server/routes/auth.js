@@ -50,7 +50,7 @@ router.post("/register", async (req, res) => {
     // hashing password
     const hashedPassword = await argon2.hash(password);
 
-    // create new User instance ,this will be document in mongdb
+    // create new User instance ,this will be document in mongodb
     const newUser = new User({ userName: userName, password: hashedPassword });
 
     // save user recently created to mongDb cloud, this async function

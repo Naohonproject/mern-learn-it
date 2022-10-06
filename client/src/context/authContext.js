@@ -29,6 +29,8 @@ const AuthContextProvider = ({ children }) => {
     try {
       // send the get request to server to authenticate
       // the access token in the local storage is valid or not
+      // this function to care about when user logged in then reload the page or user come back when close browser
+      // to check whether user logged or not, event user not request to change data, we still authenticate user
       const response = await axios.get(`${apiUrl}/auth`);
       if (response.data.success) {
         // if the token valid, dispatch action to change
@@ -39,11 +41,15 @@ const AuthContextProvider = ({ children }) => {
         });
       }
     } catch (error) {
+      // when user reload the page we will always check whether the token is valid or not
+      // if the token is invalid(this will let server return the error, we will remove that token from local storage)
       // if the token not valid from server
       // remove that token from local storage
       // and set the authContext to the init state
       localStorage.removeItem(LOCAL_STORAGE_TOKEN);
+      // reset the default header key Authorization to null
       setAuthToken(null);
+      // change the global state
       dispatch({
         type: SET_AUTH,
         payload: {
@@ -56,6 +62,7 @@ const AuthContextProvider = ({ children }) => {
 
   // useEffect to call loadUser function every time the AuthContextProvider
   // is mounted to DOM
+  // this will make always authenticate user when user reload the page
   useEffect(() => {
     loadUser();
   }, []);

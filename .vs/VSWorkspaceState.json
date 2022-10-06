@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\server",
+    "\\server\\middleware",
+    "\\server\\models",
+    "\\server\\routes"
+  ],
+  "SelectedNode": "\\server\\request.http",
+  "PreviewInSolutionExplorer": false
+}
