@@ -1,5 +1,7 @@
 export const apiUrl =
-  process.env.NODE_ENV !== "production" ? "http://localhost:5000/api" : "";
+  process.env.NODE_ENV !== "production"
+    ? "https://immense-garden-47046.herokuapp.com/api"
+    : "";
 export const LOCAL_STORAGE_TOKEN = "learnit_mern";
 
 export const SET_AUTH = "SET_AUTH";
